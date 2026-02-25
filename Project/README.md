@@ -62,7 +62,7 @@ Modern Security Operations Centers (SOCs) face:
 - Delayed incident response  
 - Manual containment inefficiencies  
 
-Manual response increases risk exposure time. FAST RAT reduces response time from hours to seconds by automating detection and containment for critical threats.
+FAST RAT reduces response time from hours to seconds by automating detection and containment for critical threats.
 
 ---
 
@@ -135,7 +135,13 @@ flowchart LR
     E --> F[Web Dashboard]
     E --> G[Email Scheduler]
     E --> H[Report Generator]
-4️⃣ Data Flow
+```
+
+---
+
+# 4️⃣ Data Flow
+
+```mermaid
 sequenceDiagram
     participant TG as Traffic Generator
     participant DE as Detection Engine
@@ -150,158 +156,146 @@ sequenceDiagram
     CE->>DB: Log Action
     DB->>API: Provide Data
     API->>UI: Update Dashboard
-5️⃣ Technology Stack
+```
 
-Python 3.x
+---
 
-Flask
+# 5️⃣ Technology Stack
 
-HTML / CSS / JavaScript
+- Python 3.x  
+- Flask  
+- HTML / CSS / JavaScript  
+- Chart.js  
+- Pandas + OpenPyXL  
+- SMTP  
+- Docker & Docker Compose  
 
-Chart.js
+---
 
-Pandas + OpenPyXL
+# 6️⃣ Database Schema
 
-SMTP
+## incidents.xlsx
+- incident_id  
+- title  
+- severity  
+- status  
+- source_ip  
+- created_at  
+- actions_taken  
 
-Docker & Docker Compose
+## events.xlsx
+- event_id  
+- event_type  
+- source_ip  
+- severity  
+- payload  
+- timestamp  
 
-6️⃣ Database Schema
-incidents.xlsx
+## actions.xlsx
+- action_id  
+- action_type  
+- target  
+- status  
+- performed_by  
+- timestamp  
 
-incident_id
+---
 
-title
+# 7️⃣ Implementation Structure
 
-severity
-
-status
-
-source_ip
-
-created_at
-
-actions_taken
-
-events.xlsx
-
-event_id
-
-event_type
-
-source_ip
-
-severity
-
-payload
-
-timestamp
-
-actions.xlsx
-
-action_id
-
-action_type
-
-target
-
-status
-
-performed_by
-
-timestamp
-
-7️⃣ Implementation Structure
+```text
 FAST-RAT/
 ├── api_server.py
 ├── ir_core.py
 ├── log_generator.py
 ├── Dockerfile
 ├── docker-compose.yml
-├── templates/dashboard.html
+├── templates/
+│   └── dashboard.html
 └── data/
-8️⃣ API Endpoints
+```
 
-GET /api/dashboard
+---
 
-GET /api/incidents
+# 8️⃣ API Endpoints
 
-GET /api/events/recent
+- GET `/api/dashboard`  
+- GET `/api/incidents`  
+- GET `/api/events/recent`  
+- GET `/api/actions`  
+- GET `/api/reports/download`  
+- POST `/api/actions/block-ip`  
 
-GET /api/actions
+---
 
-GET /api/reports/download
+# 9️⃣ Deployment
 
-POST /api/actions/block-ip
+## Docker (Recommended)
 
-9️⃣ Deployment
-Docker (Recommended)
+```bash
 docker-compose up --build
+```
 
-Access:
+Access: http://localhost:5000
 
-http://localhost:5000
-Manual Setup
+## Manual Setup
+
+```bash
 pip install -r requirements.txt
 python api_server.py
-🔟 Features
+```
 
-Real-time dashboard
+---
 
-Automated containment
+# 🔟 Features
 
-Manual containment options
+- Real-time dashboard  
+- Automated containment  
+- Manual containment options  
+- Email reports  
+- Excel export  
+- Incident analytics  
+- Action history logging  
+- Containerized deployment  
 
-Email reports
+---
 
-Excel export
+# 1️⃣1️⃣ Testing & Validation
 
-Incident analytics
-
-Action history logging
-
-Containerized deployment
-
-1️⃣1️⃣ Testing & Validation
-
-Dashboard Load: < 1 second
-
-API Response: < 100ms
-
-Event Processing: ~100 events/min
-
-Memory Usage: ~150MB
+- Dashboard Load: < 1 second  
+- API Response: < 100ms  
+- Event Processing: ~100 events/min  
+- Memory Usage: ~150MB  
 
 Security validation includes input sanitization, SMTP protection, and controlled API responses.
 
-1️⃣2️⃣ Limitations
+---
 
-Simulated containment
+# 1️⃣2️⃣ Limitations
 
-Excel-based storage (non-scalable)
+- Simulated containment  
+- Excel-based storage (non-scalable)  
+- No authentication  
+- Rule-based detection only  
+- Single-container architecture  
 
-No authentication
+---
 
-Rule-based detection only
+# 1️⃣3️⃣ Future Improvements
 
-Single-container architecture
+- JWT authentication  
+- Database migration (PostgreSQL)  
+- WebSocket real-time updates  
+- SIEM integration  
+- ML-based anomaly detection  
+- Threat intelligence feeds  
+- Playbook automation  
 
-1️⃣3️⃣ Future Improvements
+---
 
-JWT authentication
-
-Database migration (PostgreSQL)
-
-WebSocket real-time updates
-
-SIEM integration
-
-ML-based anomaly detection
-
-Threat intelligence feeds
-
-Playbook automation
-
-1️⃣4️⃣ Conclusion
+# 1️⃣4️⃣ Conclusion
 
 FAST RAT demonstrates how incident response automation can reduce response time, improve consistency, and provide centralized SOC visibility through a modular and extensible architecture.
+
+---
+
