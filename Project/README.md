@@ -136,6 +136,20 @@ flowchart LR
     E --> G[Email Scheduler]
     E --> H[Report Generator]
 4️⃣ Data Flow
+sequenceDiagram
+    participant TG as Traffic Generator
+    participant DE as Detection Engine
+    participant CE as Containment Engine
+    participant DB as Storage
+    participant API as Flask API
+    participant UI as Dashboard
+
+    TG->>DE: Generate Event
+    DE->>DB: Store Event
+    DE->>CE: If Threat Detected
+    CE->>DB: Log Action
+    DB->>API: Provide Data
+    API->>UI: Update Dashboard
 5️⃣ Technology Stack
 
 Python 3.x
