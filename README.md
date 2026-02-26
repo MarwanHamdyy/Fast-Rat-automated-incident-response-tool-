@@ -298,9 +298,3 @@ Security validation includes input sanitization, SMTP protection, and controlled
 FAST RAT demonstrates how incident response automation can reduce response time, improve consistency, and provide centralized SOC visibility through a modular and extensible architecture.
 
 ---
-
-# 👨‍💻 Authors
-
-- Marwan Hamdy  
-- Abdelrahman Mohamed  
-- Abdelrahman Wael  
